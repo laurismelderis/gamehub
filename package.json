@@ -1,0 +1,27 @@
+{
+  "name": "product-store",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"bun --watch server/src/index.ts\"",
+    "start": "bun run server/src/index.ts"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@elysiajs/cookie": "^0.7.0",
+    "@elysiajs/cors": "^0.7.1",
+    "@elysiajs/jwt": "^0.7.0",
+    "@elysiajs/swagger": "^0.7.3",
+    "concurrently": "^8.2.2",
+    "crypto": "^1.0.1",
+    "elysia": "^0.7.17",
+    "elysia-helmet": "^1.0.1",
+    "mongodb": "^6.1.0",
+    "mongoose": "^7.6.3"
+  }
+}
