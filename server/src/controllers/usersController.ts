@@ -1,10 +1,9 @@
 import { Elysia, t } from 'elysia'
-import User from '../models/User'
+import User, { IUser } from '../models/User'
 import { jwt } from '@elysiajs/jwt'
 import { password as ps } from 'bun'
 import cookie from '@elysiajs/cookie'
 import { isAuthenticated } from '../middlewares/auth'
-import { unsignCookie } from 'elysia/utils'
 
 const cookie_token_age = 15 * 60 // 15 minutes
 
@@ -89,7 +88,7 @@ export const usersController = (app: Elysia) =>
       )
       .post(
         '/login',
-        async ({ body, set, jwt, setCookie }) => {
+        async ({ body, set, jwt, setCookie, cookie }) => {
           const { email, password } = body
           const user = await User.findOne({ email })
 
@@ -198,9 +197,11 @@ export const usersController = (app: Elysia) =>
           }
         }
       })
-      .patch('/:id', async ({ params, body, set, message, status }) => {
+      .patch('/:id', async ({ params, body, set, status, message }) => {
         try {
+          const theMessage: IUser = message as IUser
           if (status === 401) return { message, status }
+          if (theMessage.role !== 'Admin') return { message, status: '403' }
 
           const { id } = params
 

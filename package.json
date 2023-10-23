@@ -22,6 +22,7 @@
     "elysia": "^0.7.17",
     "elysia-helmet": "^1.0.1",
     "mongodb": "^6.1.0",
-    "mongoose": "^7.6.3"
+    "mongoose": "^7.6.3",
+    "react": "^18.2.0"
   }
 }
