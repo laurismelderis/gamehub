@@ -11,5 +11,8 @@
   "scripts": {
     "dev": "concurrently \"cd ./app && bun start \" \"cd ./server && bun --watch src/index.ts\""
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "env-cmd": "^10.1.0"
+  }
 }

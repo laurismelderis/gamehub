@@ -10,6 +10,11 @@ const theme = createTheme({
         },
       },
     },
+    MuiInputBase: {
+      styleOverrides: {
+        input: { borderBottom: `2px solid ${grey.B10}` },
+      },
+    },
   },
   palette: {
     primary: {
@@ -24,6 +29,13 @@ const theme = createTheme({
     },
     customGrey: grey,
     customWhite: white,
+  },
+  typography: {
+    fontFamily: 'Spline Sans',
+    fontSize: 16,
+    fontWeightRegular: '600',
+    fontWeightMedium: '500',
+    fontWeightLight: '400',
   },
 })
 

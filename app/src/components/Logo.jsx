@@ -4,7 +4,7 @@ import { ReactComponent as IconLogo } from '../assets/GameHubLogo.svg'
 
 const Logo = () => (
   <Link to="/">
-    <IconLogo style={{ margin: '1em' }} />
+    <IconLogo style={{ margin: '0.5em' }} />
   </Link>
 )
 
