@@ -138,8 +138,14 @@ export const usersController = (app: Elysia) =>
         }
       })
       .get('/', async ({ set, message, status }) => {
+        const theMessage: IUser = message as IUser
+        if (status === 401) return { message, status }
+        if (theMessage.role !== 'Admin') return { message: 'Forbidden', status: '403' }
+
         try {
           const users = await User.find({})
+
+          console.log(users)
 
           if (status === 401) {
             return {
@@ -173,6 +179,10 @@ export const usersController = (app: Elysia) =>
       })
       .get('/:id', async ({ params, set, message, status }) => {
         try {
+          const theMessage: IUser = message as IUser
+          if (status === 401) return { message, status }
+          if (theMessage.role !== 'Admin') return { message: 'Forbidden', status: '403' }
+
           const { id } = params
 
           const existingUser = await User.findById(id)
@@ -201,7 +211,7 @@ export const usersController = (app: Elysia) =>
         try {
           const theMessage: IUser = message as IUser
           if (status === 401) return { message, status }
-          if (theMessage.role !== 'Admin') return { message, status: '403' }
+          if (theMessage.role !== 'Admin') return { message: 'Forbidden', status: '403' }
 
           const { id } = params
 
@@ -232,7 +242,9 @@ export const usersController = (app: Elysia) =>
       })
       .delete('/:id', async ({ params, set, message, status }) => {
         try {
+          const theMessage: IUser = message as IUser
           if (status === 401) return { message, status }
+          if (theMessage.role !== 'Admin') return { message: 'Forbidden', status: '403' }
 
           const { id } = params
 
