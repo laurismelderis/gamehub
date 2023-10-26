@@ -1,6 +1,7 @@
 import React from 'react'
-import { Grid, TextField } from '@mui/material'
-import { ReactComponent as IconLogo } from '../assets/GameHubLogo.svg'
+import { Link } from 'react-router-dom'
+import { Box, Button, Grid, TextField } from '@mui/material'
+import Logo from '../components/Logo'
 
 const LoginPage = () => (
   <Grid
@@ -11,17 +12,28 @@ const LoginPage = () => (
     sx={{ minHeight: '100vh' }}
     spacing={0}
   >
-    <IconLogo style={{ marginBottom: '1em' }} />
+    <Logo />
     <TextField
       variant="standard"
-      label="email"
+      label="Email"
       sx={{ width: '100%', maxWidth: '260px' }}
     />
     <TextField
       variant="standard"
-      label="password"
+      label="Password"
       sx={{ width: '100%', maxWidth: '260px' }}
     />
+    <Box
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+      sx={{ width: '100%', maxWidth: '260px', marginTop: '1em' }}
+    >
+      <Button variant="outlined">Login</Button>
+      <Link to="/register">
+        <Button variant="contained">Register</Button>
+      </Link>
+    </Box>
   </Grid>
 )
 
