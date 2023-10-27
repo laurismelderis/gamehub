@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import PropTypes from 'prop-types' // eslint-disable-line
+import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
+import { jwtDecode } from 'jwt-decode' // eslint-disable-line
 
 const ProtectedRoute = ({ children }) => {
   const navigate = useNavigate()
@@ -8,6 +9,7 @@ const ProtectedRoute = ({ children }) => {
 
   const checkUserToken = () => {
     const accessToken = localStorage.getItem('access-token')
+    console.log(jwtDecode(accessToken))
     if (!accessToken || accessToken === 'undefined') {
       setIsLoggedIn(false)
       return navigate('/login')

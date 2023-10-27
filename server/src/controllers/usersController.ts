@@ -5,7 +5,7 @@ import { password as ps } from 'bun'
 import cookie from '@elysiajs/cookie'
 import { isAuthenticated } from '../middlewares/auth'
 
-const cookie_token_age = 15 * 60 // 15 minutes
+const token_age = 15 * 60 // 15 minutes
 
 export const usersController = (app: Elysia) =>
   app.group('/users', (app: Elysia<'/users'>) =>
@@ -14,6 +14,7 @@ export const usersController = (app: Elysia) =>
         jwt({
           name: 'jwt',
           secret: process.env.JWT_SECRET as string,
+          exp: 3600, // 1 hour
         })
       )
       .use(
@@ -44,13 +45,12 @@ export const usersController = (app: Elysia) =>
                 })
 
                 await user.save()
-
                 const accessToken = await jwt.sign({
                   userId: user._id.toString(),
                 })
 
                 setCookie('access_token', accessToken, {
-                  maxAge: cookie_token_age, // 15 minutes
+                  maxAge: token_age, // 15 minutes
                   path: '/',
                 })
 
@@ -88,7 +88,7 @@ export const usersController = (app: Elysia) =>
       )
       .post(
         '/login',
-        async ({ body, set, jwt, setCookie, cookie }) => {
+        async ({ body, set, jwt, setCookie, params }) => {
           const { email, password } = body
           const user = await User.findOne({ email })
 
@@ -108,13 +108,15 @@ export const usersController = (app: Elysia) =>
               status: 400,
             }
           }
-
+          console.log(params)
           const accessToken = await jwt.sign({
             userId: user.id,
           })
 
+          console.log(accessToken)
+
           setCookie('access_token', accessToken, {
-            maxAge: cookie_token_age, // 15 minutes
+            maxAge: token_age, // 15 minutes
             path: '/',
           })
 
