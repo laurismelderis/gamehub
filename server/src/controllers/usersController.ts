@@ -119,6 +119,7 @@ export const usersController = (app: Elysia) =>
           })
 
           return {
+            accessToken: accessToken,
             message: 'Login successful',
             status: 201,
           }

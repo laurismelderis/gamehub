@@ -1,4 +1,4 @@
-# product-store
+# Game Hub
 
 To install dependencies:
 

@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material'
-import { grey, white } from './colors'
+import { grey, white, red } from './colors'
 
 const theme = createTheme({
   components: {
@@ -10,10 +10,21 @@ const theme = createTheme({
         },
       },
     },
-    MuiInputBase: {
-      styleOverrides: {
-        input: { borderBottom: `2px solid ${grey.B10}` },
-      },
+    MuiTextField: {
+      variants: [
+        {
+          props: { variant: 'outlined' },
+          style: {
+            border: `1px solid ${white.Z00}`,
+          },
+        },
+        {
+          props: { variant: 'standard' },
+          style: {
+            borderBottom: `2px solid ${grey.B10}`,
+          },
+        },
+      ],
     },
   },
   palette: {
@@ -29,6 +40,7 @@ const theme = createTheme({
     },
     customGrey: grey,
     customWhite: white,
+    customRed: red,
   },
   typography: {
     fontFamily: 'Spline Sans',
