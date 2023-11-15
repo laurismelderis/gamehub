@@ -8,13 +8,14 @@ const ProtectedRoute = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const checkUserToken = () => {
-    const accessToken = localStorage.getItem('access-token')
+    const accessToken = localStorage.getItem('access-token') || ''
+
     console.log(jwtDecode(accessToken))
-    if (!accessToken || accessToken === 'undefined') {
+    if (!accessToken || accessToken === undefined) {
       setIsLoggedIn(false)
       return navigate('/login')
     }
-
+    document.cookie = `access-token=${accessToken}`
     setIsLoggedIn(true)
     return null
   }

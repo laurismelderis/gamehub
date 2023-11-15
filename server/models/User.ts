@@ -5,7 +5,7 @@ export interface IUser {
   name: string
   email: string
   password: string
-  role: string
+  roles: Array<string>
   chats: Array<IChat>
 }
 
@@ -23,10 +23,12 @@ export const userSchema = new mongoose.Schema<IUser>({
     type: String,
     required: true,
   },
-  role: {
-    type: String,
-    default: 'Guest',
-  },
+  roles: [
+    {
+      type: String,
+      default: 'Guest',
+    },
+  ],
   chats: [chatSchema],
 })
 

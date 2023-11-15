@@ -18,62 +18,61 @@ const RegisterPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return (
-    user.email &&
-    user.email !== '' && (
-      <Grid
-        container
-        alignItems="center"
-        justifyContent="center"
-        direction="column"
-        sx={{ minHeight: '100vh' }}
-        gap={2}
-        spacing={0}
-      >
-        <Logo />
-        <TextField
-          variant="outlined"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          placeholder="Email"
-          type="text"
-          sx={{ width: '100%', maxWidth: '300px' }}
-        />
-        <TextField
-          variant="outlined"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          placeholder="Repeat email"
-          type="text"
-          sx={{ width: '100%', maxWidth: '300px' }}
-        />
-        <TextField
-          variant="outlined"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          placeholder="Password"
-          type="password"
-          sx={{ width: '100%', maxWidth: '300px' }}
-        />
-        <TextField
-          variant="outlined"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          placeholder="Repeat password"
-          type="password"
-          sx={{ width: '100%', maxWidth: '300px' }}
-        />
-        <Button variant="contained" sx={{ marginTop: '1em' }}>
-          Register
-        </Button>
+  console.log(user)
 
-        <StyledLink href="/">Already have an account?</StyledLink>
-      </Grid>
-    )
+  return (
+    <Grid
+      container
+      alignItems="center"
+      justifyContent="center"
+      direction="column"
+      sx={{ minHeight: '100vh' }}
+      gap={2}
+      spacing={0}
+    >
+      <Logo />
+      <TextField
+        variant="outlined"
+        InputLabelProps={{
+          shrink: true,
+        }}
+        placeholder="Email"
+        type="text"
+        sx={{ width: '100%', maxWidth: '300px' }}
+      />
+      <TextField
+        variant="outlined"
+        InputLabelProps={{
+          shrink: true,
+        }}
+        placeholder="Repeat email"
+        type="text"
+        sx={{ width: '100%', maxWidth: '300px' }}
+      />
+      <TextField
+        variant="outlined"
+        InputLabelProps={{
+          shrink: true,
+        }}
+        placeholder="Password"
+        type="password"
+        sx={{ width: '100%', maxWidth: '300px' }}
+      />
+      <TextField
+        variant="outlined"
+        InputLabelProps={{
+          shrink: true,
+        }}
+        placeholder="Repeat password"
+        type="password"
+        sx={{ width: '100%', maxWidth: '300px' }}
+      />
+      <Button variant="contained" sx={{ marginTop: '1em' }}>
+        Register
+      </Button>
+
+      <StyledLink href="/">Already have an account?</StyledLink>
+    </Grid>
   )
 }
 

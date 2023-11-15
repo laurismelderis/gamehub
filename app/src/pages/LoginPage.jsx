@@ -28,82 +28,80 @@ const LoginPage = () => {
     const token = getToken()
     if (!token || token.length === 0) {
       dispatch(loginUser({ email, password }))
+      navigate('/')
     }
   }
 
   return (
-    user.email &&
-    user.email !== '' && (
-      <Grid
-        container
-        alignItems="center"
-        justifyContent="center"
-        direction="column"
-        sx={{ minHeight: '100vh' }}
-        gap={2}
-        spacing={0}
+    <Grid
+      container
+      alignItems="center"
+      justifyContent="center"
+      direction="column"
+      sx={{ minHeight: '100vh' }}
+      gap={2}
+      spacing={0}
+    >
+      <form
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          width: '100%',
+          maxWidth: '300px',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '16px',
+        }}
       >
-        <form
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            width: '100%',
-            maxWidth: '300px',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '16px',
+        <Logo />
+        <TextField
+          variant="outlined"
+          InputLabelProps={{
+            shrink: false,
           }}
+          placeholder="Email"
+          value={email}
+          onChange={handleEmailChange}
+          disabled={user.loading}
+          sx={{ width: '100%' }}
+        />
+        <TextField
+          variant="outlined"
+          InputLabelProps={{
+            shrink: false,
+          }}
+          placeholder="Password"
+          type="password"
+          autoComplete="on"
+          value={password}
+          onChange={handlePasswordChange}
+          disabled={user.loading}
+          sx={{ width: '100%' }}
+        />
+        {user.error && (
+          <StyledTypography variant="body2">{user.error}</StyledTypography>
+        )}
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          sx={{ width: '100%', minWidth: 0 }}
         >
-          <Logo />
-          <TextField
+          <Button
             variant="outlined"
-            InputLabelProps={{
-              shrink: false,
-            }}
-            placeholder="Email"
-            value={email}
-            onChange={handleEmailChange}
+            onClick={handleLogin}
             disabled={user.loading}
-            sx={{ width: '100%' }}
-          />
-          <TextField
-            variant="outlined"
-            InputLabelProps={{
-              shrink: false,
-            }}
-            placeholder="Password"
-            type="password"
-            autoComplete="on"
-            value={password}
-            onChange={handlePasswordChange}
-            disabled={user.loading}
-            sx={{ width: '100%' }}
-          />
-          {user.error && (
-            <StyledTypography variant="body2">{user.error}</StyledTypography>
-          )}
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            sx={{ width: '100%', minWidth: 0 }}
           >
-            <Button
-              variant="outlined"
-              onClick={handleLogin}
-              disabled={user.loading}
-            >
-              Login
+            Login
+          </Button>
+          <Link to="/register">
+            <Button variant="contained" disabled={user.loading}>
+              Register
             </Button>
-            <Link to="/register">
-              <Button variant="contained" disabled={user.loading}>
-                Register
-              </Button>
-            </Link>
-          </Box>
-        </form>
-      </Grid>
-    )
+          </Link>
+        </Box>
+      </form>
+    </Grid>
   )
 }
 

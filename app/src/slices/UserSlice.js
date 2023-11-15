@@ -34,11 +34,39 @@ export const loginUser = createAsyncThunk(
   },
 )
 
+export const getMe = createAsyncThunk('user/getMe', async () => {
+  const resp = await fetch(`${REACT_APP_SERVER_URL}/users/me`, {
+    method: 'GET',
+    credentials: 'include',
+    // mode: 'no-cors',
+  }).then((r) => r.json())
+
+  console.log(resp)
+  // if (resp.message === 'Invalid credentials') {
+  //   throw new Error('Invalid credentials')
+  // }
+
+  // if ('accessToken' in resp) {
+  //   localStorage.setItem('access-token', resp.accessToken)
+  // }
+
+  return resp
+})
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(getMe.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(getMe.fulfilled, (state) => {
+      state.loading = false
+    })
+    builder.addCase(getMe.rejected, (state) => {
+      state.loading = false
+    })
     builder.addCase(loginUser.pending, (state) => {
       state.loading = true
     })
